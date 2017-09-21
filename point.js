@@ -19,20 +19,20 @@ var init = function() {
   container.appendChild( renderer.domElement );
 
   //create a new camera;
-	camera = new THREE.PerspectiveCamera(60, width/height, 1, 7000);
-	camera.position.z = 1500;
+	camera = new THREE.PerspectiveCamera(70, width/height, 1, 8000);
+	camera.position.z = 3500;
 
   controls = new THREE.TrackballControls(camera);
 
-  controls.rotateSpeed = 1.0;
-  controls.zoomSpeed = 1.2;
-  controls.panSpeed = 0.8;
+  controls.rotateSpeed = 15.0;
+  controls.zoomSpeed = 15.2;
+  controls.panSpeed = 3.8;
 
   controls.noZoom = false;
   controls.noPan = false;
 
   controls.staticMoving = true;
-  controls.dynamicDampingFactor = 0.3;
+  controls.dynamicDampingFactor = 5.6;
 
   controls.addEventListener( 'change', render );
 
@@ -54,28 +54,54 @@ var init = function() {
 
   function makeParticles() {
   group = new THREE.Group();
-//Dan:WaistLFront
+
   $.getJSON('data.json',function(data){
-    var xPositions = data.X;
-    var yPositions = data.Y;
-    var zPositions = data.Z;
-    for(var i = 0; i<xPositions.length; i++){
-        console.log(xPositions[i] + '-' + yPositions[i] + '-' + zPositions[i]);
-        var material = new THREE.MeshBasicMaterial({
-          color:'rgb(255,255,255)'
-        });
-      	///define each particle's position and add it to the system
-        var geometry = new THREE.BoxGeometry(2, 2, 2);
-        var pointCloud = new THREE.Mesh(geometry, material);
-        pointCloud.position.x =xPositions[i];
-        pointCloud.position.y =yPositions[i];
-        pointCloud.position.z =zPositions[i];
-        pointCloud.updateMatrix();
-        pointCloud.matrixAutoUpdate = false;
-        group.add(pointCloud);
-    }
+    var WLFxPositions = data.WLFX;
+    var WLFyPositions = data.WLFY;
+    var WLFzPositions = data.WLFZ;
+
+    var WRFxPositions = data.WRFX;
+    var WRFyPositions = data.WRFY;
+    var WRFzPositions = data.WRFZ;
+
+    var materialWLF = new THREE.MeshBasicMaterial({
+      color:'rgb(255,255,255)'
+    });
+    var geometryWLF = new THREE.BoxGeometry(1, 1, 1);
+
+		var materialWRF = new THREE.MeshBasicMaterial({
+			color:'rgb(255,255,0)'
+		});
+		var geometryWRF = new THREE.BoxGeometry(1, 1, 1);
+
+
+    for(var i = 0; i<WLFxPositions.length; i++){
+        //console.log(WRFxPositions[i] + '-' + WRFyPositions[i] + '-' + WRFzPositions[i]);
+        //Dan:WaistLFront
+        var pointCloudWLF = new THREE.Mesh(geometryWLF, materialWLF);
+        pointCloudWLF.position.x =WLFxPositions[i];
+        pointCloudWLF.position.y =WLFyPositions[i];
+        pointCloudWLF.position.z =WLFzPositions[i];
+        pointCloudWLF.updateMatrix();
+				//console.log(WLFzPositions[i]);
+        //pointCloud.matrixAutoUpdate = false;
+        scene.add(pointCloudWLF);
+      }
+
+      for (var i =0; i<WRFxPositions.length; i++){
+				//console.log(WRFzPositions[i]);
+          //Dan: WaistRFront
+        var pointCloudWRF = new THREE.Mesh(geometryWRF, materialWRF);
+        pointCloudWRF.position.x =WRFxPositions[i];
+        pointCloudWRF.position.y =WRFyPositions[i];
+        pointCloudWRF.position.z =WRFzPositions[i];
+
+        pointCloudWRF.updateMatrix();
+        //pointCloud.m	atrixAutoUpdate = false;
+        scene.add(pointCloudWRF);
+      }
   	//add it to the scene
-  	scene.add(group);
+  	//scene.add(group);
   });
 }
 
@@ -89,6 +115,7 @@ function onWindowResize(){
 }
 
  function render() {
+  //camera.lookAt( scene.position );
 	renderer.render(scene, camera);
 }
 
