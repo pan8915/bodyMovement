@@ -2,10 +2,14 @@ var scene, camera, renderer, pointCloud;var camera, scene, renderer;
 var width = window.innerWidth;
 var height = window.innerHeight;
 var particles, particleSystem;
+var mouse =0;
 window.onload = function() {
 	init();
 	animateParticles();
 };
+
+var INTERSECTED;
+
 var init = function() {
 	//add a scene; scene contains all 3D data
 	scene = new THREE.Scene();
@@ -20,19 +24,19 @@ var init = function() {
 
   //create a new camera;
 	camera = new THREE.PerspectiveCamera(70, width/height, 1, 10000);
-	camera.position.z = 5500;
+	camera.position.z = 3500;
 
   controls = new THREE.TrackballControls(camera);
 
-  controls.rotateSpeed = 5.0;
-  controls.zoomSpeed = 15.2;
-  controls.panSpeed = 3.8;
+  controls.rotateSpeed = 1.0;
+  controls.zoomSpeed = 3.2;
+  controls.panSpeed = 1.2;
 
   controls.noZoom = false;
   controls.noPan = false;
 
   controls.staticMoving = true;
-  controls.dynamicDampingFactor = 5.6;
+  controls.dynamicDampingFactor = 2.6;
 
   controls.addEventListener( 'change', render );
 
@@ -46,8 +50,29 @@ var init = function() {
 				scene.add( light );
 	makeParticles();
 
-  window.addEventListener('resize', onWindowResize, false);
+	var geometry = new THREE.PlaneGeometry(10000,10,10000);
+	var material = new THREE.MeshBasicMaterial({color: 0xffff00, side: THREE.DoubleSide} );
+	var plane = new THREE.Mesh( geometry, material );
+  scene.add( plane );
+
+	var geometry = new THREE.PlaneGeometry(10,10000,10000);
+	var material = new THREE.MeshBasicMaterial({color: 0xffff00, side: THREE.DoubleSide} );
+	var plane = new THREE.Mesh( geometry, material );
+  scene.add( plane );
+
+	// var geometry = new THREE.PlaneGeometry(10000,10000,1);
+	// var material = new THREE.MeshBasicMaterial({color: 0xffff00, side: THREE.DoubleSide} );
+	// var plane = new THREE.Mesh( geometry, material );
+  // scene.add( plane );
+
+	// raycaster = new THREE.Raycaster();
+	// mouse = new THREE.Vector2();
+
+	document.addEventListener('mousemove', onDocumentMouseMove,false);
+
+	window.addEventListener('resize', onWindowResize, false);
   render();
+
 }
   //lightsvar pointLight = new THREE.PointLight(0xffffff);
 
@@ -440,9 +465,24 @@ function onWindowResize(){
   render();
 }
 
+ function onDocumentMouseMove(event){
+	 event.preventDefault();
+	 mouse.x =(event.clientX / window.innerWidth) * 2 -1;
+	 mouse.y = - (event.clientY / window.innerHeight) * 2 +1;
+ }
+
  function render() {
   //camera.lookAt( scene.position );
+
 	renderer.render(scene, camera);
+	// raycaster.setFromCamera ( mouse, camera);
+	//
+	// var intersects = raycaster.intersectObjects(scene.children);
+	// if (intersects.length>0){
+	// 	if(INTERSECTED != intersects[0].object){
+  //      INTERSECTED.geometryRUAH = new THREE.BoxGeometry(30,30,30);
+	// 	}
+	// }
 }
 
 var animateParticles = function() {
