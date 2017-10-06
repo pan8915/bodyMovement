@@ -50,12 +50,12 @@ var init = function() {
 				scene.add( light );
 	makeParticles();
 
-	var geometry = new THREE.PlaneGeometry(10000,10,10000);
+	var geometry = new THREE.PlaneGeometry(10000,3,10000);
 	var material = new THREE.MeshBasicMaterial({color: 0xffff00, side: THREE.DoubleSide} );
 	var plane = new THREE.Mesh( geometry, material );
   scene.add( plane );
 
-	var geometry = new THREE.PlaneGeometry(10,10000,10000);
+	var geometry = new THREE.PlaneGeometry(3,10000,10000);
 	var material = new THREE.MeshBasicMaterial({color: 0xffff00, side: THREE.DoubleSide} );
 	var plane = new THREE.Mesh( geometry, material );
   scene.add( plane );
