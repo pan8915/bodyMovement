@@ -15,7 +15,7 @@ var INTERSECTED;
 var init = function() {
 	//add a scene; scene contains all 3D data
 	scene = new THREE.Scene();
-  scene.background = new THREE.Color('rgb(0,0,0)');
+  scene.background = new THREE.Color('rgb(79,79,79)');
 
   //create a new camera;
 	camera = new THREE.PerspectiveCamera(70, width/height, 1, 10000);
@@ -191,7 +191,7 @@ var drawPoints = function (xPos, yPos, zPos, dColor) {
 	var material = new THREE.MeshBasicMaterial({
 		color:dColor
 	});
-	var geometry = new THREE.CircleGeometry( 1.5, 10 );
+	var geometry = new THREE.CircleGeometry( 1.2, 10 );
 
 	for (var i =0; i<xPositions.length; i++){
 		var pointCloud = new THREE.Mesh(geometry, material);
