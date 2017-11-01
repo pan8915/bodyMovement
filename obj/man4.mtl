@@ -1,0 +1,6 @@
+newmtl humanBody_SG
+illum 4
+Kd 1.00 1.00 1.00
+Ka 0.20 0.20 0.20
+Tf 0.46 0.46 0.46
+Ni 1.00
