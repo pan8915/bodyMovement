@@ -1,0 +1,218 @@
+HIERARCHY
+ROOT Hips
+{
+	OFFSET	0.000000  0.688837  0.011515
+	CHANNELS 6 Xposition Yposition Zposition Zrotation Xrotation Yrotation
+	JOINT __LHipJoint
+	{
+		OFFSET	0.000000  0.045412  -0.026750
+		CHANNELS 3 Zrotation Xrotation Yrotation
+		JOINT LHipJoint
+		{
+			OFFSET	-0.000000  -0.045412  0.026750
+			CHANNELS 3 Zrotation Xrotation Yrotation
+			JOINT LeftUpLeg
+			{
+				OFFSET	0.081528  -0.014095  0.002278
+				CHANNELS 3 Zrotation Xrotation Yrotation
+				JOINT LeftLeg
+				{
+					OFFSET	0.031771  -0.307519  0.027420
+					CHANNELS 3 Zrotation Xrotation Yrotation
+					JOINT LeftFoot
+					{
+						OFFSET	0.035943  -0.316781  -0.029322
+						CHANNELS 3 Zrotation Xrotation Yrotation
+						JOINT LeftToeBase
+						{
+							OFFSET	0.010025  -0.034083  0.100159
+							CHANNELS 3 Zrotation Xrotation Yrotation
+								End Site
+								{
+									OFFSET	0.00102911	-0.00227289	0.0132681
+								}
+						}
+					}
+				}
+			}
+		}
+	}
+	JOINT LowerBack
+	{
+		OFFSET	0.000000  0.045412  -0.026750
+		CHANNELS 3 Zrotation Xrotation Yrotation
+		JOINT Spine
+		{
+			OFFSET	0.000000  0.112335  0.013224
+			CHANNELS 3 Zrotation Xrotation Yrotation
+			JOINT Spine1
+			{
+				OFFSET	-0.000000  0.125375  -0.032886
+				CHANNELS 3 Zrotation Xrotation Yrotation
+				JOINT __LeftShoulder
+				{
+					OFFSET	0.000000  0.124608  0.041532
+					CHANNELS 3 Zrotation Xrotation Yrotation
+					JOINT LeftShoulder
+					{
+						OFFSET	0.018246  -0.050914  0.017345
+						CHANNELS 3 Zrotation Xrotation Yrotation
+						JOINT LeftArm
+						{
+							OFFSET	0.112124  -0.026602  -0.011201
+							CHANNELS 3 Zrotation Xrotation Yrotation
+							JOINT LeftForeArm
+							{
+								OFFSET	0.123682  -0.139056  -0.004048
+								CHANNELS 3 Zrotation Xrotation Yrotation
+								JOINT LeftHand
+								{
+									OFFSET	0.095226  -0.090389  0.133863
+									CHANNELS 3 Zrotation Xrotation Yrotation
+									JOINT __LThumb
+									{
+										OFFSET	0.009331  -0.010647  0.021206
+										CHANNELS 3 Zrotation Xrotation Yrotation
+										JOINT LThumb
+										{
+											OFFSET	-0.007323  0.006767  0.013456
+											CHANNELS 3 Zrotation Xrotation Yrotation
+												End Site
+												{
+													OFFSET	-0.0169543	-0.00630987	0.0160233
+												}
+										}
+									}
+									JOINT LeftFingerBase
+									{
+										OFFSET	0.009331  -0.010647  0.021206
+										CHANNELS 3 Zrotation Xrotation Yrotation
+										JOINT LeftHandFinger1
+										{
+											OFFSET	0.012359  -0.017596  0.052882
+											CHANNELS 3 Zrotation Xrotation Yrotation
+												End Site
+												{
+													OFFSET	0.00264473	-0.0108779	0.0164168
+												}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+				JOINT Neck
+				{
+					OFFSET	0.000000  0.124608  0.041532
+					CHANNELS 3 Zrotation Xrotation Yrotation
+					JOINT Neck1
+					{
+						OFFSET	0.000000  0.040339  0.015703
+						CHANNELS 3 Zrotation Xrotation Yrotation
+						JOINT Head
+						{
+							OFFSET	0.000000  0.040339  0.015703
+							CHANNELS 3 Zrotation Xrotation Yrotation
+								End Site
+								{
+									OFFSET	-4.65661e-11	0.124641	-0.00433148
+								}
+						}
+					}
+				}
+				JOINT __RightShoulder
+				{
+					OFFSET	0.000000  0.124608  0.041532
+					CHANNELS 3 Zrotation Xrotation Yrotation
+					JOINT RightShoulder
+					{
+						OFFSET	-0.018246  -0.050914  0.017345
+						CHANNELS 3 Zrotation Xrotation Yrotation
+						JOINT RightArm
+						{
+							OFFSET	-0.112124  -0.026602  -0.011201
+							CHANNELS 3 Zrotation Xrotation Yrotation
+							JOINT RightForeArm
+							{
+								OFFSET	-0.123682  -0.139056  -0.004048
+								CHANNELS 3 Zrotation Xrotation Yrotation
+								JOINT RightHand
+								{
+									OFFSET	-0.095226  -0.090389  0.133863
+									CHANNELS 3 Zrotation Xrotation Yrotation
+									JOINT __RThumb
+									{
+										OFFSET	-0.009331  -0.010647  0.021206
+										CHANNELS 3 Zrotation Xrotation Yrotation
+										JOINT RThumb
+										{
+											OFFSET	0.007323  0.006767  0.013456
+											CHANNELS 3 Zrotation Xrotation Yrotation
+												End Site
+												{
+													OFFSET	0.0169543	-0.00630987	0.0160233
+												}
+										}
+									}
+									JOINT RightFingerBase
+									{
+										OFFSET	-0.009331  -0.010647  0.021206
+										CHANNELS 3 Zrotation Xrotation Yrotation
+										JOINT RightHandFinger1
+										{
+											OFFSET	-0.012359  -0.017596  0.052882
+											CHANNELS 3 Zrotation Xrotation Yrotation
+												End Site
+												{
+													OFFSET	-0.00264473	-0.0108779	0.0164168
+												}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	JOINT __RHipJoint
+	{
+		OFFSET	0.000000  0.045412  -0.026750
+		CHANNELS 3 Zrotation Xrotation Yrotation
+		JOINT RHipJoint
+		{
+			OFFSET	-0.000000  -0.045412  0.026750
+			CHANNELS 3 Zrotation Xrotation Yrotation
+			JOINT RightUpLeg
+			{
+				OFFSET	-0.081528  -0.014095  0.002278
+				CHANNELS 3 Zrotation Xrotation Yrotation
+				JOINT RightLeg
+				{
+					OFFSET	-0.031771  -0.307519  0.027420
+					CHANNELS 3 Zrotation Xrotation Yrotation
+					JOINT RightFoot
+					{
+						OFFSET	-0.035943  -0.316781  -0.029322
+						CHANNELS 3 Zrotation Xrotation Yrotation
+						JOINT RightToeBase
+						{
+							OFFSET	-0.010025  -0.034083  0.100159
+							CHANNELS 3 Zrotation Xrotation Yrotation
+								End Site
+								{
+									OFFSET	-0.00102911	-0.00227289	0.0132681
+								}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+MOTION
+Frames: 1
+Frame Time: 1.000000
+0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0

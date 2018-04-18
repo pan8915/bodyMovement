@@ -6,12 +6,13 @@ var width = window.innerWidth;
 var height = window.innerHeight;
 var particles;
 var mouse = 0;
-var clock;
 var intersection = null;
 var mixer, mesh;
 
-init();
-animateParticles();
+
+    init();
+    animateParticles();
+
 
 var INTERSECTED;
 
@@ -29,28 +30,25 @@ function init() {
     scene = new THREE.Scene();
     scene.background = new THREE.Color('rgb(50,50,50)');
 
-    mixer = new THREE.AnimationMixer(scene);
-    var loader = new THREE.JSONLoader();
-    loader.load('bvh/monster.js', handle_load);
-
-    function handle_load(geometry, materialsM) {
-        //ANIMATION MESH
-        var materialM = materialsM[0];
-        materialM.morphTargets = true;
-        materialM.color.setHex(0xffaaaa);
-
-        mesh = new THREE.Mesh(geometry, materialM);
-        mesh.position.set(-753.34552, 1075.938293, 100);
-        mesh.scale.set(0.5, 0.5, 0.5);
-
-        mesh.matrixAutoUpdate = false;
-        mesh.updateMatrix();
-        scene.add(mesh);
-
-        mixer.clipAction(geometry.animations[0], mesh).setDuration(1).startAt(-Math.random()).play();
-    }
+    // var light = new THREE.DirectionalLight(0xffffff);
+    // light.position.set(1, 1, 1);
+    // scene.add(light);
+    // var light = new THREE.DirectionalLight(0x002288);
+    // light.position.set(-1, -1, -1);
+    // scene.add(light);
+    // var light = new THREE.AmbientLight(0x222222);
+    // scene.add(light);
+    // makeParticles();
 
 
+    var objLoader = new THREE.OBJLoader();
+    objLoader.load('obj/man2.obj', function(object) {
+        object.scale.set(170, 170, 170);
+        object.position.set(-700, 900, 1400);
+        scene.add(object);
+    });
+
+    //render();
     controls = new THREE.TrackballControls(camera);
     controls.rotateSpeed = 1.0;
     controls.zoomSpeed = 3.2;
@@ -89,12 +87,13 @@ function init() {
     // document.addEventListener('mousemove', onDocumentMouseMove, false);
     window.addEventListener('resize', onWindowResize, false);
 }
+//lightsvar pointLight = new THREE.PointLight(0xffffff);
 
 
 function makeParticles() {
-    $.getJSON('data.json', function (data) {
+    $.getJSON('data.json', function(data) {
         //WLF
-        drawPoints(data.WLFX, data.WLFY, data.WLFZ, 'rgb(255,255,255)');
+        drawPoints(data.WLFX, data.WLFY, data.WLFZ, 'rgb(255,255,255,150)');
 
         //WRFX
         drawPoints(data.WRFX, data.WRFY, data.WRFZ, 'rgb(255,255,0)');
@@ -139,6 +138,7 @@ function makeParticles() {
         drawPoints(data.RSBX, data.RSBY, data.RSBZ, 'rgb(200, 130, 55)');
 
         //Dan:RShoulderTop
+
         drawPoints(data.RSTX, data.RSTY, data.RSTZ, 'rgb(35, 201, 186,150)');
         //Dan:RElbowOut
 
@@ -152,6 +152,7 @@ function onWindowResize() {
     renderer.setSize(window.innerWidth, window.innerHeight);
     camera.aspect = width / height;
     camera.updateProjectionMatrix();
+    //render();
 }
 
 function onDocumentMouseMove(event) {
@@ -159,6 +160,25 @@ function onDocumentMouseMove(event) {
     mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
     mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 }
+
+function render() {
+    camera.lookAt(scene.position);
+
+    //find intersections
+    raycaster.setFromCamera(mouse, camera);
+    var intersections = raycaster.intersectObjects(scene.children);
+    intersection = (intersections.length) > 0 ? intersections[0] : null;
+
+    if (intersection) {
+        for (var i = 0; i < intersections.length; i++) {
+            var intersection = intersections[i],
+                obj = intersection.object;
+            obj.material.color.setRGB(255, 255, 255);
+        }
+    }
+    renderer.render(scene, camera);
+}
+
 
 function drawPoints(xPos, yPos, zPos, color) {
     var xPositions = xPos;
@@ -175,21 +195,22 @@ function drawPoints(xPos, yPos, zPos, color) {
     }
 
 
-        size = 1;
-        //console.log('size=' + size);
-        var sprite = new THREE.TextureLoader().load("img/circle.png");
-        materials[i] = new THREE.PointsMaterial({
-            size: size,
-            sizeAttenuation: false,
-            map: sprite,
-            color:color,
-            alphaTest: 0.5,
-            transparent: true
-        });
-        particles = new THREE.Points(geometry, materials[i]);
-        scene.add(particles);
+    size = 1;
+    //console.log('size=' + size);
+    var sprite = new THREE.TextureLoader().load("img/circle.png");
+    materials[i] = new THREE.PointsMaterial({
+        size: size,
+        sizeAttenuation: false,
+        map: sprite,
+        color:color,
+        alphaTest: 0.5,
+        transparent: true
+    });
+    particles = new THREE.Points(geometry, materials[i]);
+    scene.add(particles);
 
 }
+
 
 function animateParticles() {
     requestAnimationFrame(animateParticles);
@@ -198,7 +219,7 @@ function animateParticles() {
 }
 
 function render() {
-    mixer.update(clock.getDelta());
+
     camera.lookAt(scene.position);
     renderer.render(scene, camera);
     //find intersections
@@ -216,4 +237,3 @@ function render() {
     }
 
 }
-
